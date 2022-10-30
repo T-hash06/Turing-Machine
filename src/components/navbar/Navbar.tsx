@@ -2,6 +2,7 @@ import '../../styles/Navbar.css';
 
 import { itemActive, setItemActive } from '../../stores/navbar';
 import { useStore } from '@nanostores/react';
+import { open, save } from '@tauri-apps/api/dialog';
 
 import NavbarItem from './NavbarItem';
 import NavbarButton from './NavbarButton';
@@ -11,11 +12,35 @@ function FileMenu(): JSX.Element {
 		setItemActive('none');
 	};
 
+	const handleOpen = (): void => {
+		void openFile();
+	};
+
+	const handleSave = (): void => {
+		void selectSaveFile();
+	};
+	const openFile = async (): Promise<void> => {
+		const selected = await open({
+			multiple: false,
+			filters: [{ name: 'Source', extensions: ['tsf'] }],
+		});
+
+		console.log(selected);
+	};
+
+	const selectSaveFile = async (): Promise<void> => {
+		const selected = await save({
+			filters: [{ name: 'Source', extensions: ['tsf'] }],
+		});
+
+		console.log(selected + '.tsf');
+	};
+
 	return (
 		<>
 			<div className='navbar-menu'>
-				<NavbarButton>open file</NavbarButton>
-				<NavbarButton>save file</NavbarButton>
+				<NavbarButton onClick={handleOpen}>open file</NavbarButton>
+				<NavbarButton onClick={handleSave}>save file</NavbarButton>
 				<span className='separator'></span>
 				<NavbarButton onClick={handleExit}>exit</NavbarButton>
 			</div>
