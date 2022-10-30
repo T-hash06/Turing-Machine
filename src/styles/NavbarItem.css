@@ -1,0 +1,48 @@
+.navbar-item {
+	display: flex;
+	position: relative;
+
+	width: max-content;
+	height: 100%;
+
+	padding: 0px 1rem;
+	justify-content: center;
+	align-items: center;
+
+	text-transform: capitalize;
+	font-size: 0.9rem;
+
+	cursor: pointer;
+
+	transition-duration: 200ms;
+
+	&:hover {
+		background-color: var(--light-grey-2);
+	}
+
+	.label {
+		height: min-content;
+		margin-top: 4px;
+
+		pointer-events: none;
+	}
+
+	.menu-container {
+		position: absolute;
+		top: 100%;
+		left: 0px;
+
+		background-color: var(--light-grey-1);
+		width: 150px;
+
+		border: 1px solid var(--light-grey-2);
+
+		overflow: hidden;
+		cursor: default;
+
+		&.hidden {
+			border: none;
+			height: 0px;
+		}
+	}
+}

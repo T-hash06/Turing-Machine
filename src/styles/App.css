@@ -1,9 +1,7 @@
 #main-container {
-	width: 100vw;
-	height: 100vh;
+	display: grid;
+	grid-template-rows: 1.6rem auto;
 
-	display: flex;
-
-	justify-content: center;
-	align-items: center;
+	height: 100%;
+	width: 100%;
 }
