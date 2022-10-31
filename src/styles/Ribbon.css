@@ -1,7 +1,10 @@
 #ribbon-section {
-	border: 1px solid var(--light-grey-2);
+	--cell-height: 21px;
+	--cell-total-width: 29px;
+	--pointer-offset: 19px;
+
 	display: grid;
-	grid-template-rows: 76px auto;
+	grid-template-rows: 85px auto;
 	grid-column: 1/4;
 
 	justify-self: center;
@@ -11,17 +14,50 @@
 	height: calc(100% - 40px);
 
 	border-radius: var(--radius);
+	border: 1px solid var(--light-grey-2);
 
 	#cells-container {
 		display: flex;
 		justify-content: center;
 		align-items: flex-end;
 
+		position: relative;
+
 		gap: 6px;
 
+		#pointer {
+			position: absolute;
+			left: calc(var(--pointer-offset) + var(--index) * var(--cell-total-width));
+
+			bottom: calc(var(--cell-height) + 25px);
+			width: var(--cell-height);
+			height: var(--cell-height);
+
+			border: 1px solid var(--pointer-color);
+			border-radius: 2px;
+
+			transition-duration: 250ms;
+
+			&::after {
+				content: '';
+
+				position: absolute;
+
+				width: 1px;
+				height: 0px;
+
+				top: 100%;
+				left: -1px;
+
+				border-top: 15px solid var(--pointer-color);
+				border-left: 11px solid transparent;
+				border-right: 11px solid transparent;
+			}
+		}
+
 		.cell {
-			width: 21px;
-			height: 21px;
+			width: var(--cell-height);
+			height: var(--cell-height);
 
 			border-radius: 2px;
 

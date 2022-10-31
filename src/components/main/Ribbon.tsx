@@ -1,8 +1,26 @@
 import '../../styles/Ribbon.css';
 
-import { colorCells, currentColor, setColorCell } from '../../stores/ribbon';
+import { colorCells, currentColor, pointerIndex, setColorCell } from '../../stores/ribbon';
+import { MouseEvent, useEffect, useRef } from 'react';
 import { setItemActive } from '../../stores/navbar';
 import { useStore } from '@nanostores/react';
+
+function Pointer(): JSX.Element {
+	const pointer = useRef<HTMLSpanElement>(null);
+	const index = useStore(pointerIndex);
+
+	useEffect(() => {
+		if (pointer.current === null) return;
+
+		pointer.current.style.setProperty('--index', index.toString());
+	}, [pointer, index]);
+
+	return (
+		<>
+			<span id='pointer' ref={pointer}></span>
+		</>
+	);
+}
 
 export default function Ribbon(): JSX.Element {
 	const cells = useStore(colorCells);
@@ -16,6 +34,11 @@ export default function Ribbon(): JSX.Element {
 		setColorCell(index, color);
 	};
 
+	const handleHover = (event: MouseEvent, index: number): void => {
+		if (event.buttons === 0) return;
+		if (event.buttons === 1) setColorCell(index, color);
+	};
+
 	return (
 		<>
 			<section id='ribbon-section' onClick={mainClick}>
@@ -25,9 +48,11 @@ export default function Ribbon(): JSX.Element {
 							className='cell'
 							style={{ backgroundColor: color }}
 							key={index}
-							onClick={(_) => handleCellClick(index)}
+							onMouseDown={(_) => handleCellClick(index)}
+							onMouseEnter={(event) => handleHover(event, index)}
 						></span>
 					))}
+					<Pointer />
 				</section>
 			</section>
 		</>

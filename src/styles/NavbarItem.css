@@ -28,6 +28,8 @@
 	}
 
 	.menu-container {
+		z-index: 5;
+
 		position: absolute;
 		top: 100%;
 		left: 0px;
