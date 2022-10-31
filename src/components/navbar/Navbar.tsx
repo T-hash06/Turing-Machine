@@ -1,11 +1,11 @@
 import '../../styles/Navbar.css';
 
 import { itemActive, setItemActive } from '../../stores/navbar';
-import { useStore } from '@nanostores/react';
 import { open, save } from '@tauri-apps/api/dialog';
+import { useStore } from '@nanostores/react';
 
-import NavbarItem from './NavbarItem';
 import NavbarButton from './NavbarButton';
+import NavbarItem from './NavbarItem';
 
 function FileMenu(): JSX.Element {
 	const handleExit = (): void => {

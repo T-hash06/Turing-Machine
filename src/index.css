@@ -17,6 +17,8 @@
 	--light-grey-2: #454545;
 	--active: #264653;
 
+	--radius: 6px;
+
 	background-color: var(--grey);
 }
 

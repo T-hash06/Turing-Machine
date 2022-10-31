@@ -1,0 +1,36 @@
+#ribbon-section {
+	border: 1px solid var(--light-grey-2);
+	display: grid;
+	grid-template-rows: 76px auto;
+	grid-column: 1/4;
+
+	justify-self: center;
+	align-self: center;
+
+	width: calc(100% - 40px);
+	height: calc(100% - 40px);
+
+	border-radius: var(--radius);
+
+	#cells-container {
+		display: flex;
+		justify-content: center;
+		align-items: flex-end;
+
+		gap: 6px;
+
+		.cell {
+			width: 21px;
+			height: 21px;
+
+			border-radius: 2px;
+
+			display: inline-block;
+			cursor: pointer;
+
+			transition-duration: 150ms;
+
+			border: 1px solid var(--light-grey-2);
+		}
+	}
+}

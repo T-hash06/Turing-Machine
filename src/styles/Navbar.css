@@ -1,6 +1,7 @@
 #navbar-container {
 	background-color: var(--light-grey-1);
 	height: 100%;
+	grid-column: 1/4;
 
 	width: 100%;
 

@@ -1,5 +1,6 @@
-import { MouseEvent } from 'react';
 import '../../styles/NavbarButton.css';
+
+import { MouseEvent } from 'react';
 
 interface props {
 	children: string;
