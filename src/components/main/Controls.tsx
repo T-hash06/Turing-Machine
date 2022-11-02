@@ -1,6 +1,13 @@
 import '../../styles/Controls.css';
 
-import { setCurrentColor } from '../../stores/ribbon';
+import {
+	moveLeftPointer,
+	moveRightPointer,
+	setCurrentColor,
+	setPointerIndex,
+} from '../../stores/ribbon';
+
+import Button from '../ui/Button';
 
 function ColorSelector(): JSX.Element {
 	const colors: Color[] = ['#e76f51', '#2a9d8f', '#e9c46a', '#a35cff', '#5b59d0', 'transparent'];
@@ -27,11 +34,43 @@ function ColorSelector(): JSX.Element {
 	);
 }
 
+function PointerControls(): JSX.Element {
+	const handleLeft = (): void => {
+		moveLeftPointer();
+	};
+	const handleRight = (): void => {
+		moveRightPointer();
+	};
+
+	const handleReset = (): void => {
+		setPointerIndex(0);
+	};
+
+	return (
+		<>
+			<div id='pointer-controls'>
+				<div className='buttons'>
+					<Button className='pointer-button' onClick={handleLeft}>
+						Left
+					</Button>
+					<Button className='pointer-button' onClick={handleRight}>
+						Right
+					</Button>
+					<Button className='pointer-button reset-pointer' onClick={handleReset}>
+						Reset Pointer
+					</Button>
+				</div>
+			</div>
+		</>
+	);
+}
+
 export default function Controls(): JSX.Element {
 	return (
 		<>
 			<section id='controls-container'>
 				<ColorSelector />
+				<PointerControls />
 			</section>
 		</>
 	);

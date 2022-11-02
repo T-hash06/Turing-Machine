@@ -29,6 +29,6 @@ export function moveLeftPointer(): void {
 	pointerIndex.set(parseindex(pointerIndex.get() - 1));
 }
 
-export function movRightPointer(): void {
+export function moveRightPointer(): void {
 	pointerIndex.set(parseindex(pointerIndex.get() + 1));
 }

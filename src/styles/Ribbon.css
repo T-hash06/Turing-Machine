@@ -36,7 +36,7 @@
 			border: 1px solid var(--pointer-color);
 			border-radius: 2px;
 
-			transition-duration: 250ms;
+			transition: 250ms ease-in-out;
 
 			&::after {
 				content: '';

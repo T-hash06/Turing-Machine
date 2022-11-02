@@ -1,0 +1,20 @@
+.button-container {
+	--back: var(--light-grey-1);
+	--hover: var(--light-grey-2);
+	--color: var(--default-color);
+
+	border: none;
+	outline: none;
+
+	cursor: pointer;
+
+	color: var(--color);
+	background-color: var(--back);
+	border-radius: 4px;
+
+	transition-duration: 200ms;
+
+	&:hover {
+		background-color: var(--hover);
+	}
+}

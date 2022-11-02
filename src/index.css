@@ -13,10 +13,15 @@
 	-webkit-text-size-adjust: 100%;
 
 	--grey: #242423;
+	--default-color: rgba(255, 255, 255, 0.87);
 	--light-grey-1: #333533;
 	--light-grey-2: #454545;
+	--dark-grey-1: #232323;
+
 	--active: #264653;
 	--pointer-color: #aaf683;
+
+	--main-color: #89f589;
 
 	--radius: 6px;
 
