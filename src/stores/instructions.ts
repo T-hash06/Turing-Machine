@@ -1,55 +1,83 @@
 import { atom } from 'nanostores';
 
-export const userInstructions = atom(new Map<FromInstruction, ToInstruction>());
+export const userInstructions = atom<Array<[FromInstruction, ToInstruction]>>([]);
+
+export function clearInstructions(): void {
+	userInstructions.set([]);
+}
 
 export function addInstruction(instruction: Instruction): void {
-	const newValues = new Map(userInstructions.get());
+	const newValues = [...userInstructions.get()];
 
-	newValues.set(
+	newValues.push([
 		`${instruction.fromColor}:${instruction.fromState}`,
-		`${instruction.toColor}:${instruction.toState}:${instruction.moveTo}`
-	);
+		`${instruction.toColor}:${instruction.toState}:${instruction.moveTo}`,
+	]);
 
 	userInstructions.set(newValues);
 }
 
 export function setFromPart(from: FromInstruction, newFrom: FromInstruction): void {
-	const newValues = new Map(userInstructions.get());
+	const newValues = [...userInstructions.get()];
+	const froms = newValues.map((item) => item[0]);
 
-	const to = userInstructions.get().get(from);
+	const to = froms.lastIndexOf(from);
 
-	if (to === undefined) return;
+	if (to === -1) return;
 
-	newValues.delete(from);
-	newValues.set(newFrom, to);
+	newValues[to][0] = newFrom;
 
 	userInstructions.set(newValues);
 }
 
 export function setToPart(from: FromInstruction, newTo: ToInstruction): void {
-	const newValues = new Map(userInstructions.get());
-	newValues.set(from, newTo);
+	const newValues = [...userInstructions.get()];
+	const froms = newValues.map((item) => item[0]);
+
+	const index = froms.lastIndexOf(from);
+
+	if (index === -1) return;
+
+	newValues[index][1] = newTo;
 
 	userInstructions.set(newValues);
 }
 
 export function switchDirection(from: FromInstruction): void {
-	const newValues = new Map(userInstructions.get());
-	const toPart = newValues.get(from);
+	const newValues = [...userInstructions.get()];
+	const froms = newValues.map((item) => item[0]);
+
+	const index = froms.lastIndexOf(from);
+
+	if (index === -1) return;
+
+	const toPart = newValues[index][1];
 
 	if (toPart === undefined) return;
 
-	const [toColor, toState, moveTo] = toPart.split(':') as [Color, string, Direction];
+	const [toColor, toState, moveTo] = parseInstruction<[number, string, Direction]>(toPart);
+	const parsedMoveTo = Number(moveTo) === 0 ? 1 : Number(moveTo) === 1 ? -1 : 0;
 
-	newValues.set(from, `${toColor}:${toState}:${moveTo < 0 ? 1 : -1}`);
+	newValues[index][1] = `${toColor}:${toState}:${parsedMoveTo}`;
 
 	userInstructions.set(newValues);
 }
 
-addInstruction({
-	fromColor: '#2a9d8f',
-	toColor: '#5b59d0',
-	fromState: 'test',
-	toState: 'asd',
-	moveTo: 0,
-});
+export function getInstruction(color: number, state: string): Instruction | undefined {
+	const values = [...userInstructions.get()];
+	const froms = values.map((item) => item[0]);
+
+	const index = froms.lastIndexOf(`${color}:${state}`);
+
+	if (index === -1) return undefined;
+
+	const [toColor, toState, moveTo] = parseInstruction<[number, string, Direction]>(
+		values[index][1]
+	);
+
+	return { fromColor: color, fromState: state, toColor, toState, moveTo };
+}
+
+export function parseInstruction<T>(data: FromInstruction | ToInstruction): T {
+	return data.split(':').map((value) => (isNaN(parseInt(value)) ? value : parseInt(value))) as T;
+}

@@ -1,6 +1,6 @@
 #controls-container {
 	display: grid;
-	grid-template-rows: 140px auto 80px;
+	grid-template-rows: 138px auto 82px;
 
 	gap: 20px;
 
@@ -79,6 +79,20 @@
 					grid-column: 1/3;
 				}
 			}
+		}
+	}
+
+	.delete-instructions {
+		width: calc(100% - 60px);
+		justify-self: center;
+		align-self: center;
+
+		--back: var(--danger-light);
+		--color: var(--dark-grey-1);
+
+		&:hover {
+			background-color: var(--danger-dark);
+			color: var(--dark-grey-1);
 		}
 	}
 }

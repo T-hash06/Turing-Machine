@@ -6,26 +6,26 @@ import {
 	setCurrentColor,
 	setPointerIndex,
 } from '../../stores/ribbon';
+import { clearInstructions } from '../../stores/instructions';
+import { colors } from '../../constants/constants';
 
 import Button from '../ui/Button';
 
 function ColorSelector(): JSX.Element {
-	const colors: Color[] = ['#e76f51', '#2a9d8f', '#e9c46a', '#a35cff', '#5b59d0', 'transparent'];
-
-	const handleClick = (color: Color): void => {
-		setCurrentColor(color);
+	const handleClick = (index: number): void => {
+		setCurrentColor(index);
 	};
 
 	return (
 		<>
 			<div id='color-selector'>
 				<div className='selector'>
-					{colors.map((color) => (
+					{colors.map((color, index) => (
 						<span
 							key={color}
 							className='color-button'
 							style={{ backgroundColor: color }}
-							onClick={(_) => handleClick(color)}
+							onClick={(_) => handleClick(index)}
 						></span>
 					))}
 				</div>
@@ -66,11 +66,18 @@ function PointerControls(): JSX.Element {
 }
 
 export default function Controls(): JSX.Element {
+	const handleDelete = (): void => {
+		clearInstructions();
+	};
+
 	return (
 		<>
 			<section id='controls-container'>
 				<ColorSelector />
 				<PointerControls />
+				<Button className='delete-instructions' onClick={handleDelete}>
+					delete instructions
+				</Button>
 			</section>
 		</>
 	);

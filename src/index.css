@@ -12,8 +12,11 @@
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-text-size-adjust: 100%;
 
-	--grey: #242423;
 	--default-color: rgba(255, 255, 255, 0.87);
+	--danger-dark: #ff686b;
+	--danger-light: #f08080;
+
+	--grey: #242423;
 
 	--light-grey-1: #333533;
 	--light-grey-2: #454545;

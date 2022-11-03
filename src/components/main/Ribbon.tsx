@@ -3,6 +3,7 @@ import '../../styles/Ribbon.css';
 import { colorCells, currentColor, pointerIndex, setColorCell } from '../../stores/ribbon';
 import { MouseEvent, useEffect, useRef } from 'react';
 import { setItemActive } from '../../stores/navbar';
+import { colors } from '../../constants/constants';
 import { useStore } from '@nanostores/react';
 
 function Pointer(): JSX.Element {
@@ -46,7 +47,7 @@ export default function Ribbon(): JSX.Element {
 					{cells.map((color, index) => (
 						<span
 							className='cell'
-							style={{ backgroundColor: color }}
+							style={{ backgroundColor: colors[color] }}
 							key={index}
 							onMouseDown={(_) => handleCellClick(index)}
 							onMouseEnter={(event) => handleHover(event, index)}

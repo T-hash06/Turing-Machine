@@ -1,20 +1,49 @@
 import '../../styles/Instructions.css';
 
 import {
+	addInstruction,
+	parseInstruction,
 	setFromPart,
 	setToPart,
 	switchDirection,
 	userInstructions,
 } from '../../stores/instructions';
 import { MdOutlineArrowRightAlt as Arrow } from 'react-icons/md';
+import { GiPauseButton as Stop } from 'react-icons/gi';
+import { colors } from '../../constants/constants';
 import { currentColor } from '../../stores/ribbon';
 import { useStore } from '@nanostores/react';
 import { ChangeEvent } from 'react';
 
 import Button from '../ui/Button';
+
 import classnames from 'classnames';
 
 interface props extends Instruction {}
+interface iconProps {
+	direction: Direction;
+	onClick: () => void;
+}
+
+function StepIcon({ direction, onClick }: iconProps): JSX.Element {
+	if (direction === 1 || direction === -1)
+		return (
+			<div
+				className={classnames('direction', {
+					left: direction === -1,
+				})}
+				onClick={onClick}
+			>
+				<Arrow />
+			</div>
+		);
+
+	return (
+		<div className={classnames('direction stop')} onClick={onClick}>
+			<Stop />
+		</div>
+	);
+}
 
 function Instruction(props: props): JSX.Element {
 	const selectedColor = useStore(currentColor);
@@ -57,7 +86,7 @@ function Instruction(props: props): JSX.Element {
 				></input>
 				<span
 					className='from-color color-cell'
-					style={{ backgroundColor: props.fromColor }}
+					style={{ backgroundColor: colors[props.fromColor] }}
 					onClick={handleFromColor}
 				></span>
 				<div className='to-icon'>
@@ -65,7 +94,7 @@ function Instruction(props: props): JSX.Element {
 				</div>
 				<span
 					className='to-color color-cell'
-					style={{ backgroundColor: props.toColor }}
+					style={{ backgroundColor: colors[props.toColor] }}
 					onClick={handleToColor}
 				></span>
 				<input
@@ -74,42 +103,58 @@ function Instruction(props: props): JSX.Element {
 					value={props.toState}
 					onChange={handleToState}
 				></input>
-				<div
-					className={classnames('direction', { left: props.moveTo === -1 })}
-					onClick={handleDirection}
-				>
-					<Arrow />
-				</div>
+				<StepIcon direction={props.moveTo} onClick={handleDirection} />
 			</div>
 		</>
 	);
 }
 
-export default function Instructions(): JSX.Element {
+function InstructionList(): JSX.Element {
 	const instructions = useStore(userInstructions);
 
 	return (
 		<>
+			{instructions.map(([key, value], index) => {
+				const [fromColor, fromState] = parseInstruction<[number, string]>(key);
+				const [toColor, toState, moveTo] = parseInstruction<[number, string, Direction]>(value);
+
+				console.log(index);
+
+				return (
+					<Instruction
+						key={index}
+						fromColor={fromColor}
+						fromState={fromState}
+						toColor={toColor}
+						toState={toState}
+						moveTo={Number(moveTo) as Direction}
+					/>
+				);
+			})}
+		</>
+	);
+}
+
+export default function Instructions(): JSX.Element {
+	const handleAdd = (): void => {
+		addInstruction({
+			fromColor: colors.length - 1,
+			toColor: colors.length - 1,
+
+			fromState: '',
+			toState: '',
+
+			moveTo: 0,
+		});
+	};
+
+	return (
+		<>
 			<div id='instructions-container'>
-				{/* <Instruction fromColor='#2a9d8f' toColor='#5b59d0' fromState='T' toState='A' moveTo={-1} />
-				<Instruction fromColor='#2a9d8f' toColor='#5b59d0' fromState='T' toState='A' moveTo={1} /> */}
-				{Array.from(instructions).map(([key, value], index) => {
-					const [fromColor, fromState] = key.split(':') as [Color, string];
-					const [toColor, toState, moveTo] = value.split(':') as [Color, string, Direction];
-
-					return (
-						<Instruction
-							key={index}
-							fromColor={fromColor}
-							fromState={fromState}
-							toColor={toColor}
-							toState={toState}
-							moveTo={Number(moveTo) as Direction}
-						/>
-					);
-				})}
-
-				<Button className='add-button'>add instruction</Button>
+				<InstructionList />
+				<Button className='add-button' onClick={handleAdd}>
+					add instruction
+				</Button>
 			</div>
 		</>
 	);
