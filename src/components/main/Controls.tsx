@@ -50,10 +50,10 @@ function PointerControls(): JSX.Element {
 		<>
 			<div id='pointer-controls'>
 				<div className='buttons'>
-					<Button className='pointer-button' onClick={handleLeft}>
+					<Button className='pointer-button' onClick={handleLeft} main>
 						Left
 					</Button>
-					<Button className='pointer-button' onClick={handleRight}>
+					<Button className='pointer-button' onClick={handleRight} main>
 						Right
 					</Button>
 					<Button className='pointer-button reset-pointer' onClick={handleReset}>

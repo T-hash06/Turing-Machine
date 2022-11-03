@@ -14,8 +14,11 @@
 
 	--grey: #242423;
 	--default-color: rgba(255, 255, 255, 0.87);
+
 	--light-grey-1: #333533;
 	--light-grey-2: #454545;
+	--light-grey-3: #606060;
+
 	--dark-grey-1: #232323;
 
 	--active: #264653;
@@ -35,6 +38,12 @@
 	-webkit-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+}
+
+input {
+	-webkit-user-select: text;
+	-ms-user-select: text;
+	user-select: text;
 }
 
 #root {
