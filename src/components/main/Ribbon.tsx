@@ -1,13 +1,24 @@
 import '../../styles/Ribbon.css';
 
-import { colorCells, currentColor, pointerIndex, setColorCell } from '../../stores/ribbon';
+import {
+	clearCells,
+	colorCells,
+	currentColor,
+	pointerIndex,
+	pointerState,
+	setColorCell,
+} from '../../stores/ribbon';
 import { MouseEvent, useEffect, useRef } from 'react';
 import { setItemActive } from '../../stores/navbar';
 import { colors } from '../../constants/constants';
 import { useStore } from '@nanostores/react';
 
+import NamedSection from '../ui/NamedSection';
+import Button from '../ui/Button';
+
 function Pointer(): JSX.Element {
 	const pointer = useRef<HTMLSpanElement>(null);
+
 	const index = useStore(pointerIndex);
 
 	useEffect(() => {
@@ -26,6 +37,7 @@ function Pointer(): JSX.Element {
 export default function Ribbon(): JSX.Element {
 	const cells = useStore(colorCells);
 	const color = useStore(currentColor);
+	const state = useStore(pointerState);
 
 	const mainClick = (): void => {
 		setItemActive('none');
@@ -38,6 +50,10 @@ export default function Ribbon(): JSX.Element {
 	const handleHover = (event: MouseEvent, index: number): void => {
 		if (event.buttons === 0) return;
 		if (event.buttons === 1) setColorCell(index, color);
+	};
+
+	const handleClear = (): void => {
+		clearCells();
 	};
 
 	return (
@@ -54,6 +70,14 @@ export default function Ribbon(): JSX.Element {
 						></span>
 					))}
 					<Pointer />
+				</section>
+				<section className='ribbon-controls'>
+					<NamedSection name='current state' className='pointer-state'>
+						<span className='state'>{state}</span>
+					</NamedSection>
+					<Button className='clear-ribbon' onClick={handleClear}>
+						Clear Ribbon
+					</Button>
 				</section>
 			</section>
 		</>

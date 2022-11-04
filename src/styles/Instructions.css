@@ -99,6 +99,7 @@
 		width: 30%;
 		justify-self: left;
 		margin-top: 20px;
+		margin-bottom: 20px;
 
 		&:hover {
 			background-color: var(--main-color);

@@ -5,6 +5,7 @@ import {
 	moveRightPointer,
 	setCurrentColor,
 	setPointerIndex,
+	setPointerState,
 } from '../../stores/ribbon';
 import { clearInstructions } from '../../stores/instructions';
 import { colors } from '../../constants/constants';
@@ -43,6 +44,7 @@ function PointerControls(): JSX.Element {
 	};
 
 	const handleReset = (): void => {
+		setPointerState('');
 		setPointerIndex(0);
 	};
 

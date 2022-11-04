@@ -1,6 +1,6 @@
 #main-container {
 	display: grid;
-	grid-template-rows: 1.6rem 200px auto;
+	grid-template-rows: 1.6rem 220px auto;
 	grid-template-columns: 220px auto 220px;
 
 	height: 100%;

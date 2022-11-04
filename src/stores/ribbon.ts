@@ -12,6 +12,12 @@ function parseindex(value: number): number {
 	return 32 - (Math.abs(value) % 32);
 }
 
+export function clearCells(): void {
+	const newCells = new Array(32).fill(colors.length - 1);
+
+	colorCells.set(newCells);
+}
+
 export function setColorCell(index: number, color: number): void {
 	const newCells = colorCells.get();
 	newCells[index] = color;

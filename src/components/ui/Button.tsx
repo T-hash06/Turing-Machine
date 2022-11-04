@@ -1,9 +1,11 @@
 import '../../styles/Button.css';
 
+import { ReactElement } from 'react';
+
 import classnames from 'classnames';
 
 interface props {
-	children: string;
+	children: string | ReactElement;
 	onClick?: () => void;
 	className?: string;
 	main?: boolean;

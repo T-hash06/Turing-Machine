@@ -30,7 +30,7 @@
 			left: calc(var(--pointer-offset) + var(--index) * var(--cell-total-width));
 
 			bottom: calc(var(--cell-height) + 25px);
-			width: var(--cell-height);
+			min-width: var(--cell-height);
 			height: var(--cell-height);
 
 			border: 1px solid var(--pointer-color);
@@ -67,6 +67,50 @@
 			transition-duration: 150ms;
 
 			border: 1px solid var(--light-grey-2);
+		}
+	}
+
+	.ribbon-controls {
+		display: grid;
+		grid-template-columns: auto 300px;
+	}
+
+	.pointer-state {
+		align-self: flex-end;
+
+		margin: 0px 0px 10px 10px;
+
+		border-radius: var(--radius);
+
+		width: 140px;
+		height: 46px;
+
+		display: flex;
+		justify-content: left;
+
+		.state {
+			margin-left: 12px;
+			margin-top: 4px;
+
+			color: var(--default-color);
+		}
+	}
+
+	.clear-ribbon {
+		justify-self: right;
+		align-self: flex-end;
+
+		margin-right: 10px;
+		margin-bottom: 10px;
+
+		width: 160px;
+
+		--back: var(--danger-light);
+		--color: var(--dark-grey-1);
+
+		&:hover {
+			background-color: var(--danger-dark);
+			color: var(--dark-grey-1);
 		}
 	}
 }

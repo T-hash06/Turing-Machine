@@ -1,9 +1,10 @@
 import '../styles/App.css';
 
+import Instructions from './main/Instructions';
 import Controls from './main/Controls';
 import Navbar from './navbar/Navbar';
 import Ribbon from './main/Ribbon';
-import Instructions from './main/Instructions';
+import Steps from './main/Steps';
 
 export default function App(): JSX.Element {
 	return (
@@ -13,6 +14,7 @@ export default function App(): JSX.Element {
 				<Ribbon />
 				<Controls />
 				<Instructions />
+				<Steps />
 			</div>
 		</>
 	);
