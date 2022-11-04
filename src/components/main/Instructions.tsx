@@ -2,13 +2,14 @@ import '../../styles/Instructions.css';
 
 import {
 	addInstruction,
+	deleteInstruction,
 	parseInstruction,
 	setFromPart,
 	setToPart,
 	switchDirection,
 	userInstructions,
 } from '../../stores/instructions';
-import { MdOutlineArrowRightAlt as Arrow } from 'react-icons/md';
+import { MdDelete, MdOutlineArrowRightAlt as Arrow } from 'react-icons/md';
 import { GiPauseButton as Stop } from 'react-icons/gi';
 import { colors } from '../../constants/constants';
 import { currentColor } from '../../stores/ribbon';
@@ -75,9 +76,15 @@ function Instruction(props: props): JSX.Element {
 		switchDirection(`${props.fromColor}:${props.fromState}`);
 	};
 
+	const handleDelete = (): void => {
+		deleteInstruction(`${props.fromColor}:${props.fromState}`);
+	};
 	return (
 		<>
 			<div className='instruction'>
+				<button className='delete-button' onClick={handleDelete}>
+					<MdDelete></MdDelete>
+				</button>
 				<input
 					type='text'
 					className='from-state input'
@@ -117,8 +124,6 @@ function InstructionList(): JSX.Element {
 			{instructions.map(([key, value], index) => {
 				const [fromColor, fromState] = parseInstruction<[number, string]>(key);
 				const [toColor, toState, moveTo] = parseInstruction<[number, string, Direction]>(value);
-
-				console.log(index);
 
 				return (
 					<Instruction

@@ -17,6 +17,19 @@ export function addInstruction(instruction: Instruction): void {
 	userInstructions.set(newValues);
 }
 
+export function deleteInstruction(from: FromInstruction): void {
+	const newValues = [...userInstructions.get()];
+	const froms = newValues.map((item) => item[0]);
+
+	const to = froms.lastIndexOf(from);
+
+	if (to === -1) return;
+
+	newValues.splice(to, 1);
+
+	userInstructions.set(newValues);
+}
+
 export function setFromPart(from: FromInstruction, newFrom: FromInstruction): void {
 	const newValues = [...userInstructions.get()];
 	const froms = newValues.map((item) => item[0]);
