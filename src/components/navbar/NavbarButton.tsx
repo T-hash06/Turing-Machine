@@ -1,4 +1,4 @@
-import '../../styles/NavbarButton.css';
+import '../../styles/navbar/NavbarButton.css';
 
 import { MouseEvent } from 'react';
 

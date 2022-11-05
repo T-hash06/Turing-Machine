@@ -1,4 +1,4 @@
-import '../../styles/Controls.css';
+import '../../styles/main/Controls.css';
 
 import {
 	moveLeftPointer,

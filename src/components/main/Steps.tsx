@@ -1,4 +1,4 @@
-import '../../styles/Steps.css';
+import '../../styles/main/Steps.css';
 
 import { FaPlay, FaStop, FaForward } from 'react-icons/fa';
 import { useRunStep } from '../../hooks/useRunner';

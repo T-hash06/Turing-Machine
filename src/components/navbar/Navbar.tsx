@@ -1,9 +1,11 @@
-import '../../styles/Navbar.css';
+import '../../styles/navbar/Navbar.css';
 
 import { itemActive, setItemActive } from '../../stores/navbar';
 import { open, save } from '@tauri-apps/api/dialog';
 import { useStore } from '@nanostores/react';
+import { useState } from 'react';
 
+import AboutUsWindow from '../windows/AboutUsWindow';
 import NavbarButton from './NavbarButton';
 import NavbarItem from './NavbarItem';
 
@@ -49,17 +51,28 @@ function FileMenu(): JSX.Element {
 }
 
 function AboutMenu(): JSX.Element {
+	const [aboutVisible, setAboutVisible] = useState(false);
+
 	const handleExit = (): void => {
 		setItemActive('none');
+	};
+	const handleShow = (): void => {
+		setAboutVisible(true);
+	};
+
+	const handleExitWindow = (): void => {
+		setAboutVisible(false);
 	};
 
 	return (
 		<>
 			<div className='navbar-menu'>
-				<NavbarButton>about us</NavbarButton>
+				<NavbarButton onClick={handleShow}>about us</NavbarButton>
 				<span className='separator'></span>
 				<NavbarButton onClick={handleExit}>exit</NavbarButton>
 			</div>
+
+			<AboutUsWindow isShowing={aboutVisible} onClose={handleExitWindow} />
 		</>
 	);
 }

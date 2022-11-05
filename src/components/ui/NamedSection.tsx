@@ -1,4 +1,4 @@
-import '../../styles/NamedSection.css';
+import '../../styles/ui/NamedSection.css';
 
 import classnames from 'classnames';
 

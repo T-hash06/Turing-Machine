@@ -21,5 +21,7 @@
 		padding: 0px 0.5rem;
 
 		background-color: var(--back);
+
+		text-transform: capitalize;
 	}
 }

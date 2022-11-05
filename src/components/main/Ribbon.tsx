@@ -1,4 +1,4 @@
-import '../../styles/Ribbon.css';
+import '../../styles/main/Ribbon.css';
 
 import {
 	clearCells,

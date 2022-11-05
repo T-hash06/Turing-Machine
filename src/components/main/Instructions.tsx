@@ -1,4 +1,4 @@
-import '../../styles/Instructions.css';
+import '../../styles/main/Instructions.css';
 
 import {
 	addInstruction,

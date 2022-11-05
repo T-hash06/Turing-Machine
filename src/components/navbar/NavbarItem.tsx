@@ -1,4 +1,4 @@
-import '../../styles/NavbarItem.css';
+import '../../styles/navbar/NavbarItem.css';
 
 import classnames from 'classnames';
 
