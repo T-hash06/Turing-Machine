@@ -3,10 +3,7 @@ import '../../styles/windows/AboutUsWindow.css';
 import SubWindow from '../ui/SubWindow';
 import Button from '../ui/Button';
 
-interface props {
-	isShowing: boolean;
-	onClose: () => void;
-}
+interface props extends SubWindowProps {}
 
 export default function AboutUsWindow({ isShowing, onClose }: props): JSX.Element {
 	if (!isShowing) return <></>;

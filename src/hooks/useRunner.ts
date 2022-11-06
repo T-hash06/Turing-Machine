@@ -9,7 +9,7 @@ import {
 	setPointerState,
 } from '../stores/ribbon';
 
-export function useRunStep(): () => void {
+export function useRunStep(): () => boolean {
 	const pointer = useStore(pointerIndex);
 	const state = useStore(pointerState);
 	const cells = useStore(colorCells);

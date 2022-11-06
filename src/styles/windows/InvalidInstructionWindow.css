@@ -1,0 +1,63 @@
+.invalid-instruction {
+	display: grid;
+	grid-template-rows: 70px auto 82px;
+	grid-template-columns: repeat(2, 1fr);
+
+	background-color: var(--grey);
+	border-radius: var(--radius);
+	width: 600px;
+	height: 300px;
+
+	.title {
+		display: flex;
+		align-items: center;
+
+		justify-self: left;
+		align-self: flex-end;
+
+		width: 100%;
+		height: 100%;
+		text-indent: 40px;
+
+		font-size: 1.6rem;
+
+		font-weight: 100;
+		grid-column: 1/3;
+
+		border-bottom: 1px solid var(--light-grey-2);
+	}
+
+	.data-container {
+		display: grid;
+		grid-template-rows: 40px auto 40px;
+		grid-column: 1/3;
+
+		.text {
+			justify-self: center;
+			align-self: center;
+		}
+
+		.instruction-example {
+			height: 50px;
+			width: 85%;
+
+			justify-self: center;
+			align-self: center;
+
+			border-radius: var(--radius);
+			border: 1px solid var(--light-grey-2);
+		}
+	}
+
+	.button {
+		width: 70%;
+
+		align-self: flex-end;
+
+		margin: 10px;
+
+		&.create-button {
+			justify-self: right;
+		}
+	}
+}

@@ -20,4 +20,9 @@ declare global {
 
 		moveTo: Direction;
 	}
+
+	interface SubWindowProps {
+		isShowing: boolean;
+		onClose: () => void;
+	}
 }

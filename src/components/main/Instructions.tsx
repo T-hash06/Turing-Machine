@@ -48,36 +48,34 @@ function StepIcon({ direction, onClick }: iconProps): JSX.Element {
 
 function Instruction(props: props): JSX.Element {
 	const selectedColor = useStore(currentColor);
+	const fromPart: FromInstruction = `${props.fromColor}:${props.fromState}`;
 
 	const handleFromState = (event: ChangeEvent<HTMLInputElement>): void => {
 		const value = event.target.value;
 
-		setFromPart(`${props.fromColor}:${props.fromState}`, `${props.fromColor}:${value}`);
+		setFromPart(fromPart, `${props.fromColor}:${value}`);
 	};
 
 	const handleToState = (event: ChangeEvent<HTMLInputElement>): void => {
 		const value = event.target.value;
 
-		setToPart(`${props.fromColor}:${props.fromState}`, `${props.toColor}:${value}:${props.moveTo}`);
+		setToPart(fromPart, `${props.toColor}:${value}:${props.moveTo}`);
 	};
 
 	const handleFromColor = (): void => {
-		setFromPart(`${props.fromColor}:${props.fromState}`, `${selectedColor}:${props.fromState}`);
+		setFromPart(fromPart, `${selectedColor}:${props.fromState}`);
 	};
 
 	const handleToColor = (): void => {
-		setToPart(
-			`${props.fromColor}:${props.fromState}`,
-			`${selectedColor}:${props.toState}:${props.moveTo}`
-		);
+		setToPart(fromPart, `${selectedColor}:${props.toState}:${props.moveTo}`);
 	};
 
 	const handleDirection = (): void => {
-		switchDirection(`${props.fromColor}:${props.fromState}`);
+		switchDirection(fromPart);
 	};
 
 	const handleDelete = (): void => {
-		deleteInstruction(`${props.fromColor}:${props.fromState}`);
+		deleteInstruction(fromPart);
 	};
 	return (
 		<>
