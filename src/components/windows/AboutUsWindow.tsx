@@ -1,5 +1,7 @@
 import '../../styles/windows/AboutUsWindow.css';
 
+import { open } from '@tauri-apps/api/shell';
+
 import SubWindow from '../ui/SubWindow';
 import Button from '../ui/Button';
 
@@ -10,6 +12,9 @@ export default function AboutUsWindow({ isShowing, onClose }: props): JSX.Elemen
 
 	const handleClose = (): void => {
 		onClose();
+	};
+	const handleOpen = (): void => {
+		void open('https://github.com/T-Hash06/Turing-Machine').then((_) => onClose());
 	};
 
 	return (
@@ -25,7 +30,7 @@ export default function AboutUsWindow({ isShowing, onClose }: props): JSX.Elemen
 					<Button className='button' onClick={handleClose}>
 						Close
 					</Button>
-					<Button className='button' main>
+					<Button className='button' onClick={handleOpen} main>
 						Go To Github
 					</Button>
 				</div>

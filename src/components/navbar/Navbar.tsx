@@ -57,6 +57,7 @@ function AboutMenu(): JSX.Element {
 		setItemActive('none');
 	};
 	const handleShow = (): void => {
+		setItemActive('none');
 		setAboutVisible(true);
 	};
 

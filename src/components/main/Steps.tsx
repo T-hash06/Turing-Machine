@@ -5,6 +5,7 @@ import { useRunStep } from '../../hooks/useRunner';
 import { useEffect, useState } from 'react';
 
 import InvalidInstructionWindow from '../windows/InvalidInstructionWindow';
+import DocsWindow from '../windows/DocsWindow';
 import Button from '../ui/Button';
 
 export default function Steps(): JSX.Element {
@@ -12,6 +13,7 @@ export default function Steps(): JSX.Element {
 
 	const [isPlaying, setPlaying] = useState(false);
 	const [invalidShowing, setInvalidShowing] = useState(false);
+	const [docsShowing, setDocsShowing] = useState(false);
 
 	const handleInvalidClose = (): void => {
 		setInvalidShowing(false);
@@ -34,6 +36,10 @@ export default function Steps(): JSX.Element {
 		setPlaying(false);
 	};
 
+	const handleCloseDocs = (): void => {
+		setDocsShowing(false);
+	};
+
 	useEffect(() => {
 		const playIntervalId = setInterval(() => {
 			if (!isPlaying) return;
@@ -49,7 +55,7 @@ export default function Steps(): JSX.Element {
 				<section className='border-section'></section>
 
 				<div className='border-section'>
-					<section className='buttons-section section'>
+					<section className='buttons-section'>
 						<Button className='next-step' onClick={handleStep} main>
 							Next Step
 						</Button>
@@ -65,10 +71,16 @@ export default function Steps(): JSX.Element {
 					</section>
 				</div>
 
-				<section className='border-section'></section>
+				<section className='border-section docs-section'>
+					<Button className='button' onClick={() => setDocsShowing(true)}>
+						Documentation
+					</Button>
+					<Button className='button'>Tests</Button>
+				</section>
 			</div>
 
 			<InvalidInstructionWindow isShowing={invalidShowing} onClose={handleInvalidClose} />
+			<DocsWindow isShowing={docsShowing} onClose={handleCloseDocs} />
 		</>
 	);
 }

@@ -25,4 +25,13 @@ declare global {
 		isShowing: boolean;
 		onClose: () => void;
 	}
+
+	interface DocInterface {
+		name: string;
+		autor: string;
+		preCondition: string;
+		postCondition: string;
+		strategy: string;
+		comment: string;
+	}
 }
