@@ -1,6 +1,7 @@
 import '../../styles/main/Controls.css';
 
 import {
+	currentColor,
 	moveLeftPointer,
 	moveRightPointer,
 	setCurrentColor,
@@ -9,10 +10,15 @@ import {
 } from '../../stores/ribbon';
 import { clearInstructions } from '../../stores/instructions';
 import { colors } from '../../constants/constants';
+import { useStore } from '@nanostores/react';
 
 import Button from '../ui/Button';
 
+import classnames from 'classnames';
+
 function ColorSelector(): JSX.Element {
+	const current = useStore(currentColor);
+
 	const handleClick = (index: number): void => {
 		setCurrentColor(index);
 	};
@@ -21,14 +27,19 @@ function ColorSelector(): JSX.Element {
 		<>
 			<div id='color-selector'>
 				<div className='selector'>
-					{colors.map((color, index) => (
-						<span
-							key={color}
-							className='color-button'
-							style={{ backgroundColor: color }}
-							onClick={(_) => handleClick(index)}
-						></span>
-					))}
+					{colors.map((color, index) => {
+						const selected = current === index;
+						const boxShadow = `0px 0px 10px ${selected ? color : 'transparent'}`;
+
+						return (
+							<span
+								key={color}
+								className={classnames('color-button', { selected })}
+								style={{ backgroundColor: color, boxShadow }}
+								onClick={(_) => handleClick(index)}
+							></span>
+						);
+					})}
 				</div>
 			</div>
 		</>

@@ -1,5 +1,5 @@
 import { atom } from 'nanostores';
-import { colors } from '../constants/constants';
+import { colors, ribbonTestCells } from '../constants/constants';
 
 export const colorCells = atom<number[]>(new Array(32).fill(colors.length - 1));
 export const currentColor = atom<number>(colors.length - 1);
@@ -10,6 +10,12 @@ function parseindex(value: number): number {
 	if (value >= 0) return value % 32;
 
 	return 32 - (Math.abs(value) % 32);
+}
+
+export function loadFromTest(cells: number[]): void {
+	const newCells = [...cells, ...new Array(32 - ribbonTestCells).fill(colors.length - 1)];
+
+	colorCells.set(newCells);
 }
 
 export function clearCells(): void {

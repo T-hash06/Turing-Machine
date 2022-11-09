@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 import InvalidInstructionWindow from '../windows/InvalidInstructionWindow';
 import DocsWindow from '../windows/DocsWindow';
+import TestWindow from '../windows/TestWindow';
 import Button from '../ui/Button';
 
 export default function Steps(): JSX.Element {
@@ -14,10 +15,7 @@ export default function Steps(): JSX.Element {
 	const [isPlaying, setPlaying] = useState(false);
 	const [invalidShowing, setInvalidShowing] = useState(false);
 	const [docsShowing, setDocsShowing] = useState(false);
-
-	const handleInvalidClose = (): void => {
-		setInvalidShowing(false);
-	};
+	const [testShowing, setTestShowing] = useState(false);
 
 	const handleStep = (): void => {
 		const validInstruction = nextStep();
@@ -34,10 +32,6 @@ export default function Steps(): JSX.Element {
 
 	const handleStop = (): void => {
 		setPlaying(false);
-	};
-
-	const handleCloseDocs = (): void => {
-		setDocsShowing(false);
 	};
 
 	useEffect(() => {
@@ -75,12 +69,18 @@ export default function Steps(): JSX.Element {
 					<Button className='button' onClick={() => setDocsShowing(true)}>
 						Documentation
 					</Button>
-					<Button className='button'>Tests</Button>
+					<Button className='button' onClick={() => setTestShowing(true)}>
+						Tests
+					</Button>
 				</section>
 			</div>
 
-			<InvalidInstructionWindow isShowing={invalidShowing} onClose={handleInvalidClose} />
-			<DocsWindow isShowing={docsShowing} onClose={handleCloseDocs} />
+			<InvalidInstructionWindow
+				isShowing={invalidShowing}
+				onClose={() => setInvalidShowing(false)}
+			/>
+			<DocsWindow isShowing={docsShowing} onClose={() => setDocsShowing(false)} />
+			<TestWindow isShowing={testShowing} onClose={() => setTestShowing(false)} />
 		</>
 	);
 }

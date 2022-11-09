@@ -6,3 +6,5 @@ export const colors: Color[] = [
 	'#5b59d0',
 	'transparent',
 ];
+
+export const ribbonTestCells = 24;

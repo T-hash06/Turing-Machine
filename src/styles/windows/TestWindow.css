@@ -1,0 +1,157 @@
+.test-window {
+	background-color: var(--grey);
+	border-radius: var(--radius);
+
+	display: grid;
+	grid-template-rows: auto 82px;
+
+	width: 95%;
+	height: 80%;
+
+	.ribbons-section {
+		display: flex;
+		flex-wrap: wrap;
+
+		width: 100%;
+		overflow: auto;
+
+		justify-content: center;
+		align-content: flex-start;
+
+		border-bottom: 1px solid var(--light-grey-1);
+
+		.ribbon {
+			display: grid;
+			grid-template-columns: auto 120px 48px;
+
+			height: 62px;
+			width: calc(100% - 40px);
+
+			border-radius: var(--radius);
+			border: 1px solid var(--light-grey-2);
+
+			margin-top: 20px;
+
+			animation: 250ms spawnRibbon linear;
+
+			&:nth-last-child(1) {
+				margin-bottom: 20px;
+			}
+
+			.cells-container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				border-radius: var(--radius);
+
+				gap: 6px;
+
+				.cell {
+					width: 21px;
+					height: 21px;
+
+					border: 1px solid var(--light-grey-1);
+					border-radius: 2px;
+
+					transition-duration: 150ms;
+
+					cursor: pointer;
+				}
+			}
+
+			.button {
+				justify-self: center;
+				align-self: center;
+
+				width: calc(100% - 20px);
+
+				&:hover {
+					background-color: var(--main-color);
+					color: var(--grey);
+				}
+
+				&.delete {
+					display: flex;
+					justify-self: right;
+
+					justify-content: center;
+					align-items: center;
+
+					width: min-content;
+					margin-right: 10px;
+
+					background-color: transparent;
+					color: var(--danger-dark);
+
+					font-size: 2rem;
+				}
+			}
+		}
+	}
+
+	.bottom-section {
+		display: grid;
+
+		grid-template-columns: 240px 240px 220px auto;
+
+		.button {
+			width: 200px;
+
+			justify-self: center;
+			align-self: flex-end;
+
+			margin-bottom: 20px;
+
+			&.close-button {
+				justify-self: left;
+				margin-left: 20px;
+
+				width: 140px;
+			}
+		}
+	}
+
+	.color-selector {
+		justify-self: center;
+
+		width: 100%;
+		height: 100%;
+
+		display: flex;
+
+		justify-content: center;
+		align-items: center;
+
+		gap: 10px;
+		.cell {
+			width: 26px;
+			height: 26px;
+
+			border: 1px solid var(--light-grey-2);
+			border-radius: 2px;
+
+			cursor: pointer;
+
+			transition-duration: 150ms;
+
+			&.selected {
+				box-shadow: inherit;
+				border-color: transparent;
+
+				&:nth-last-child(1) {
+					border: 1px solid var(--light-grey-2);
+				}
+			}
+		}
+	}
+}
+
+@keyframes spawnRibbon {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
