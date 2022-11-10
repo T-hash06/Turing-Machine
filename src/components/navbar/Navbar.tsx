@@ -1,5 +1,6 @@
 import '../../styles/navbar/Navbar.css';
 
+import { useSaveSourceFile } from '../../hooks/useSaveSourceFile';
 import { itemActive, setItemActive } from '../../stores/navbar';
 import { open, save } from '@tauri-apps/api/dialog';
 import { useStore } from '@nanostores/react';
@@ -8,34 +9,46 @@ import { useState } from 'react';
 import AboutUsWindow from '../windows/AboutUsWindow';
 import NavbarButton from './NavbarButton';
 import NavbarItem from './NavbarItem';
+import useLoadSourceFile from '../../hooks/useLoadSourceFile';
 
 function FileMenu(): JSX.Element {
+	const saveSourceFile = useSaveSourceFile();
+	const loadSourceFile = useLoadSourceFile();
+
 	const handleExit = (): void => {
 		setItemActive('none');
 	};
 
 	const handleOpen = (): void => {
 		void openFile();
+		handleExit();
 	};
 
 	const handleSave = (): void => {
 		void selectSaveFile();
+		handleExit();
 	};
 	const openFile = async (): Promise<void> => {
-		const selected = await open({
+		const selected = (await open({
 			multiple: false,
 			filters: [{ name: 'Source', extensions: ['tsf'] }],
-		});
+		})) as string;
 
-		console.log(selected);
+		if (selected === null) return;
+
+		void loadSourceFile(selected);
 	};
 
 	const selectSaveFile = async (): Promise<void> => {
 		const selected = await save({
-			filters: [{ name: 'Source', extensions: ['tsf'] }],
+			filters: [{ name: 'Source', extensions: ['.tsf'] }],
 		});
 
-		console.log(selected + '.tsf');
+		if (selected === null) return;
+
+		const path = `${selected.split('.')[0]}.tsf`;
+
+		await saveSourceFile(path);
 	};
 
 	return (
@@ -93,7 +106,7 @@ export default function TopBar(): JSX.Element {
 
 	return (
 		<>
-			<div id='navbar-container'>
+			<div id='navbar-container' onClick={(event) => event.stopPropagation()}>
 				<NavbarItem
 					label='file'
 					hidden={active !== 'file'}

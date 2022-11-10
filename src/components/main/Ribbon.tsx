@@ -9,7 +9,6 @@ import {
 	setColorCell,
 } from '../../stores/ribbon';
 import { MouseEvent, useEffect, useRef } from 'react';
-import { setItemActive } from '../../stores/navbar';
 import { colors } from '../../constants/constants';
 import { useStore } from '@nanostores/react';
 
@@ -39,10 +38,6 @@ export default function Ribbon(): JSX.Element {
 	const color = useStore(currentColor);
 	const state = useStore(pointerState);
 
-	const mainClick = (): void => {
-		setItemActive('none');
-	};
-
 	const handleCellClick = (index: number): void => {
 		setColorCell(index, color);
 	};
@@ -58,7 +53,7 @@ export default function Ribbon(): JSX.Element {
 
 	return (
 		<>
-			<section id='ribbon-section' onClick={mainClick}>
+			<section id='ribbon-section'>
 				<section id='cells-container'>
 					{cells.map((color, index) => (
 						<span

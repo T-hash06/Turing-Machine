@@ -2,6 +2,11 @@ import { atom } from 'nanostores';
 
 export const userInstructions = atom<Array<[FromInstruction, ToInstruction]>>([]);
 
+export function setInstruction(instructions: Array<[FromInstruction, ToInstruction]>): void {
+	const newInstructions = [...instructions];
+	userInstructions.set(newInstructions);
+}
+
 export function clearInstructions(): void {
 	userInstructions.set([]);
 }

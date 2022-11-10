@@ -5,9 +5,13 @@ export const initialState = atom('');
 
 export const testRibbons = atom<number[][]>([]);
 
+export function setRibbons(ribbons: number[][]): void {
+	const newRibbons = [...ribbons];
+	testRibbons.set(newRibbons);
+}
+
 export function addRibbon(): void {
 	const newRibbons = [...testRibbons.get(), new Array(ribbonTestCells).fill(colors.length - 1)];
-
 	testRibbons.set(newRibbons);
 }
 

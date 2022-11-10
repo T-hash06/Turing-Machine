@@ -12,6 +12,11 @@ function parseindex(value: number): number {
 	return 32 - (Math.abs(value) % 32);
 }
 
+export function setCells(cells: number[]): void {
+	const newCells = [...cells];
+	colorCells.set(newCells);
+}
+
 export function loadFromTest(cells: number[]): void {
 	const newCells = [...cells, ...new Array(32 - ribbonTestCells).fill(colors.length - 1)];
 

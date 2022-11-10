@@ -34,4 +34,11 @@ declare global {
 		strategy: string;
 		comment: string;
 	}
+
+	interface SourceFile {
+		instructions: Array<[FromInstruction, ToInstruction]>;
+		cells: number[];
+		test: number[][];
+		docs: DocInterface;
+	}
 }
