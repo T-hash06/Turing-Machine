@@ -1,6 +1,6 @@
 #controls-container {
 	display: grid;
-	grid-template-rows: 130px auto 70px;
+	grid-template-rows: auto 114px 70px;
 
 	gap: 20px;
 
